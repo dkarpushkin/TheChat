@@ -13,18 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url
+from django.contrib import admin
 from django.urls import reverse_lazy
+from django.views.generic import RedirectView
 
-from Chat.views import LoginNoPassword
-
+from chat_app.views import ChatView
 
 urlpatterns = [
-    url(r'login',
-        LoginNoPassword.as_view(success_url=reverse_lazy('chatapp:lobby'),
-                                template_name='registration/login.html'),
-        name='login'),
-    url(r'^',
-        include('chat_app.urls'),
-        name='chatapp'),
+    url(r'^$', RedirectView.as_view(url=reverse_lazy('room', kwargs={'room_slug': 'mainroom'})), name='lobby'),
+    url(r'^room/(?P<room_slug>[\w\d\-]+)/$', ChatView.as_view(), name='room'),
 ]

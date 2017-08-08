@@ -1,0 +1,70 @@
+html, body {
+    font-family: 'Open Sans', serif;
+    height: 100%;
+}
+.fill {
+    height: 100%;
+}
+
+.content {
+    margin: 0;
+}
+
+.content {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border: solid;
+    border-width: 1pt;
+    border-color: #4990E2;
+}
+
+.header {
+    border-bottom: solid;
+    border-width: 1pt;
+    border-color: #4990E2;
+}
+.chat-box {
+    height: 100%;
+    width: 100%;
+    right: 0;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    height: 60px;
+    width: 100%;
+    background: white;
+
+    border-top: solid;
+    border-width: 1pt;
+    border-color: #4990E2;
+}
+
+.users-container {
+    overflow: scroll;
+
+    border-left: solid;
+    border-width: 1pt;
+    border-color: #4990E2;
+}
+
+.messages-container {
+    overflow: scroll;
+
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+.msg {
+    margin: 40px 5px;
+}
+.msg .username {
+
+}
+.msg .text {
+    border: solid;
+    border-color: #9b9b9b;
+    border-width: 1px;
+}

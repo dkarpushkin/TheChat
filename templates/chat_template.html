@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}HEEBO.CHAT - {{ room.name }}{% endblock %}
+
+{% block body %}
+  <body class="container">
+  {#  <div class="container fill">#}
+  <div class="fill content">
+
+    <div class="header">
+      <h1>{{ room.name }}</h1>
+      <h1>HEEBO.CHAT</h1>
+    </div>
+
+    <div class="row chat-box">
+
+      <div class="messages-container col-10">
+        {% for message in messages %}
+          <div class="row msg">
+            <div class="col-2 username">{{ message.author }}</div>
+            <div class="col-10 text">{{ message.text }}</div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="users-container col-2">
+        {% for user in users %}
+          <div>
+            <h4>{{ user.author__username }}</h4>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <div class="row footer">
+      <div class="col-10">
+        <input id="message-input" type="text" placeholder="Type here..."/>
+      </div>
+      <div class="col-2">
+        <input id="send-msg-btn" type="button" , value="TALK!">
+      </div>
+    </div>
+
+  </div>  <!-- div.content -->
+  {#  </div>  <!-- div.container -->#}
+
+  {% include 'javascripts.html' %}
+  </body>
+{% endblock %}
