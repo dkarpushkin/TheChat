@@ -1,15 +1,88 @@
+(function () {
+    $('#join_room_btn').click(join_room);
+    $('#send_msg_form').submit(send_message);
 
-
-(function() {
-    function join_room() {
-
+    function join_room(event) {
+        $.post('/joinroom/' + info.room_slug + '/' + info.user.username + '/')
+            .done(function (data) {
+                $('.join_button').hide()
+            })
+            .fail(function (data) {
+                alert(data.errors.join())
+            });
     }
 
-    function leave_room() {
+    function send_message(event) {
+        var form = $(this),
+            data = form.serialize(),
+            url = form.attr('action');
 
+        $.post(url, data)
+            .done(function (d) {   //  on success
+                return
+            })
+            .fail(function (data) {   //  on error
+                alert(data.errors.join())
+            });
+
+        event.preventDefault();
+        event.stopPropagation()
     }
-    
-    function send_message() {
-        
+
+    function render_message(msg_data, is_own) {
+        var msg_template = $('.messages-container [hidden]');
+
+        var new_msg = msg_template.clone();
+        new_msg.removeAttr('hidden');
+        new_msg.find('.username h4').text(msg_data['nickname']);
+        new_msg.find('.text span').text(msg_data['text']);
+
+        msg_template.parent().prepend(new_msg)
+    }
+
+    function render_user(user_data, is_own) {
+        var user_template = $('.users-container [hidden]');
+
+        var new_user = user_template.clone();
+        new_user.removeAttr('hidden');
+        new_user.find('h4').text(user_data['nickname']);
+
+        user_template.parent().prepend(new_user);
+    }
+
+    run_chat = function (room_slug) {
+        var ws;
+
+        function run_ws_chat() {
+            ws = new WebSocket(info.ws_url + room_slug + "/");
+
+            ws.onmessage = function (event) {
+                var msg_data = JSON.parse(event.data);
+
+                switch (msg_data['type']) {
+                    case 'user joined':
+                        render_user(msg_data);
+                        break;
+                    case 'message sent':
+                        render_message(msg_data);
+                        break;
+                    default:
+                        break;
+                }
+            };
+
+            ws.onclose = function () {
+                // Try to reconnect in 5 seconds
+                setTimeout(function () {
+                    run_ws_chat()
+                }, 5000);
+            }
+        }
+
+        if ("WebSocket" in window) {
+            run_ws_chat()
+        } else {
+            alert("Browser does not support WebSocket")
+        }
     }
 })();

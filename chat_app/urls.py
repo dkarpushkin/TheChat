@@ -14,13 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView
 
-from chat_app.views import ChatView
+from chat_app.views import ChatView, JoinRoomView
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url=reverse_lazy('room', kwargs={'room_slug': 'mainroom'})), name='lobby'),
-    url(r'^room/(?P<room_slug>[\w\d\-]+)/$', ChatView.as_view(), name='room'),
+    #   редирект на комнату 'mainroom' - она одна единственная
+    url(r'^$',
+        RedirectView.as_view(url=reverse_lazy('room', kwargs={'room_slug': 'mainroom'})),
+        name='lobby'),
+
+    url(r'^room/(?P<room_slug>[\w\d\-]+)/$',
+        ChatView.as_view(),
+        name='room'),
+    url(r'^joinroom/(?P<room_slug>[\w\d\-]+)/(?P<nickname>[\w\d-]+)/$',
+        JoinRoomView.as_view(),
+        name='joinroom')
 ]

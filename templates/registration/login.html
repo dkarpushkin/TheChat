@@ -14,7 +14,7 @@
           </div>
           <div class="panel-body">
             <form accept-charset="UTF-8" role="form"
-                  action="{% url 'login' %}" method="post">
+                  action="{% url 'login' %}?next={% url 'lobby' %}" method="post">
               <fieldset>
                 <div class="form-group">
                   {#			    		    <input class="form-control" placeholder="E-mail" name="username" type="text" value="{{ login }}">#}

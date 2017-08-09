@@ -1,7 +1,7 @@
 from .base import *
 
 
-# SESSION_ENGINE = 'redis_sessions.session'
+SESSION_ENGINE = 'redis_sessions.session'
 # SESSION_REDIS_HOST = 'localhost'
 # SESSION_REDIS_PORT = 6379
 

@@ -2,5 +2,6 @@ dj-database-url
 Django
 psycopg2
 tornado
+tornado-redis
 django-redis-sessions
 django-widget_tweaks

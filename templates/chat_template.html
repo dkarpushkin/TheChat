@@ -4,47 +4,82 @@
 
 {% block body %}
   <body class="container">
-  {#  <div class="container fill">#}
   <div class="fill content">
 
     <div class="header">
-      <h1>{{ room.name }}</h1>
-      <h1>HEEBO.CHAT</h1>
+      <h1 class="left">{{ room.name|upper }}</h1>
+      <h1 class="right">HEEBO.CHAT</h1>
     </div>
 
     <div class="row chat-box">
 
       <div class="messages-container col-10">
+        {#      шаблон для новых сообщений#}
+        <div hidden class="row msg">
+          <div class="col-2 username"><h4></h4></div>
+          <div class="col-10 text"><span></span></div>
+        </div>
+
         {% for message in messages %}
           <div class="row msg">
-            <div class="col-2 username">{{ message.author }}</div>
-            <div class="col-10 text">{{ message.text }}</div>
+            <div class="col-2 username"><h4>{{ message.author }}</h4></div>
+            <div class="col-10 text"><span>{{ message.text }}</span></div>
           </div>
         {% endfor %}
       </div>
 
-      <div class="users-container col-2">
-        {% for user in users %}
-          <div>
-            <h4>{{ user.author__username }}</h4>
+      <div class="users col-2">
+        {% if not is_joined %}
+          <div class="join_button">
+            <button id="join_room_btn">JOIN ROOM</button>
           </div>
-        {% endfor %}
-      </div>
+        {% endif %}
+        <div class="users-container">
 
+          {#      шаблон для создания новых пользователей#}
+          <div class="user" hidden>
+            <h4 class=".username"></h4>
+          </div>
+
+          {% for user_att in user_atts %}
+            <div class="user{% if user == user_att.user %} own{% endif %}">
+              <h4 class=".username">{{ user_att.user.username }}</h4>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
 
-    <div class="row footer">
-      <div class="col-10">
-        <input id="message-input" type="text" placeholder="Type here..."/>
+    <form id="send_msg_form" method="post" action="{% url 'room' room_slug=room.slug %}">
+      <div class="footer row">
+        <div class="col-10">
+          <input id="message-input" name="text" type="text" placeholder="Type here..."/>
+        </div>
+        <div class="col-2">
+          <button id="send-msg-btn">TALK!</button>
+        </div>
+        {% csrf_token %}
       </div>
-      <div class="col-2">
-        <input id="send-msg-btn" type="button" , value="TALK!">
-      </div>
-    </div>
+    </form>
 
   </div>  <!-- div.content -->
-  {#  </div>  <!-- div.container -->#}
 
   {% include 'javascripts.html' %}
+  <script type="application/javascript">
+      info = {
+          room_slug: '{{ room.slug }}',
+          user: {
+              {% if user_att %}
+                  nickname: '{{ user_att.nickname }}',
+              {% endif %}
+              username: '{{ user.username }}'
+          },
+          ws_url: 'ws://127.0.0.1:8888/'
+      };
+
+      $(document).ready(function () {
+          run_chat(info.room_slug)
+      })
+  </script>
   </body>
 {% endblock %}
