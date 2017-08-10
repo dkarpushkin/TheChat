@@ -84,6 +84,8 @@ service postgresql restart
 cat << EOF | su - postgres -c psql
 -- Create the database user:
 CREATE USER $APP_DB_USER WITH PASSWORD '$APP_DB_PASS';
+
+create database chat with owner=vagrant teplate=template0;
 EOF
 
 #	Linux utils
@@ -107,8 +109,16 @@ apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms
 #	Scrapy requirements
 apt-get install -y python3-lxml
 
+apt-get install -y redis-server
+
 #	apt-get cleanup
 apt-get clean
+
+
+#	python django
+cd /projects/Chat
+pip3 install -r requirements.txt
+
 
 #	Disabling firewall
 sudo ufw disable
