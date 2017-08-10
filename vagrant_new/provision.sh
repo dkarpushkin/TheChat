@@ -116,8 +116,7 @@ apt-get clean
 
 
 #	python django
-cd /projects/Chat
-pip3 install -r requirements.txt
+pip3 install -r /project/requirements.txt
 
 
 #	Disabling firewall

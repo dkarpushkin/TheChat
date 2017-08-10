@@ -13,7 +13,12 @@ Django принимает сообщения, отправляет их чере
 
 # Installation:
 
-1. install and run redis-server
-2. run python manage.py fill_db
-3. run python manage.py starttornado
-4. run django server
+vagrant up
+
+In vagrant:
+
+		cd /project
+		python3 manage.py migrate
+		python3 manage.py fill_db
+		python3 manage.py starttornado&
+		python3 manage.py runserver 0.0.0.0:8080
