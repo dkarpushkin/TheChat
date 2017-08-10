@@ -15,15 +15,20 @@
     function send_message(event) {
         var form = $(this),
             data = form.serialize(),
-            url = form.attr('action');
+            url = form.attr('action'),
+            text = form.find('#message-input').val();
 
-        $.post(url, data)
-            .done(function (d) {   //  on success
-                return
-            })
-            .fail(function () {   //  on error
-                alert('You are not joined')
-            });
+        if (typeof(text) === 'undefined' || text.length === 0) {
+            alert('Message is empty');
+        } else {
+            $.post(url, data)
+                .done(function (d) {   //  on success
+                    return
+                })
+                .fail(function () {   //  on error
+                    alert('You are not joined')
+                });
+        }
 
         event.preventDefault();
         event.stopPropagation()
