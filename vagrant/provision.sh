@@ -107,6 +107,9 @@ apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms
 #	Scrapy requirements
 apt-get install -y python3-lxml
 
+#	redis server
+apt-get install -y redis-server
+
 #	apt-get cleanup
 apt-get clean
 
