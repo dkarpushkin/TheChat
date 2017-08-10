@@ -83,7 +83,7 @@
               {% endif %}
               username: '{{ user.username }}'
           },
-          ws_url: 'ws://127.0.0.1:8888/'
+          wc_port: {{ ws_port }}
       };
 
       $(document).ready(function () {

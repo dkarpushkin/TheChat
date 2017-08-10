@@ -54,7 +54,7 @@
         var ws;
 
         function run_ws_chat() {
-            ws = new WebSocket(info.ws_url + room_slug + "/");
+            ws = new WebSocket(build_wc_url(location.hostname, info.wc_port) + room_slug + "/");
 
             ws.onmessage = function (event) {
                 var msg_data = JSON.parse(event.data);
@@ -84,5 +84,9 @@
         } else {
             alert("Browser does not support WebSocket")
         }
+    };
+
+    function build_wc_url(hostname, port){
+        return 'ws://' + hostname + ':' + port + '/'
     }
 })();

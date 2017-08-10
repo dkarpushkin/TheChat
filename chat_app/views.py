@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
+from django.conf import settings
 
 from Chat.utils import JSONResponseMixin
 from chat_app.models import Message, Room, RoomAttendence
@@ -81,6 +82,7 @@ class ChatView(JSONResponseMixin, LoginRequiredMixin, ListView):
             'room': room,
             'user_att': room_att,
             'is_joined': len(room_att) > 0,
+            'ws_port': settings.WS_PORT
         })
 
         return super(ChatView, self).get_context_data(**kwargs)

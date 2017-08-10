@@ -34,23 +34,12 @@ class MessagesHandler(tornado.websocket.WebSocketHandler):
         self.client.connect()
 
     def open(self, room_slug, *args, **kwargs):
-        session_key = self.get_cookie(settings.SESSION_COOKIE_NAME)
-        session = session_engine.SessionStore(session_key)
-
-        try:
-            self.user_id = session["_auth_user_id"]
-            self.sender_name = User.objects.get(id=self.user_id).username
-        except (KeyError, User.DoesNotExist):
-            self.close()
-            return
-
         try:
             room = Room.objects.get(slug=room_slug)
-        except User.DoesNotExist:
-            self.close()
-            return
-
-        self.client.subscribe(room_channel_name(room), self.on_subscribed)
+        except:
+            pass
+        else:
+            self.client.subscribe(room_channel_name(room), self.on_subscribed)
 
     def on_subscribed(self, *args, **kwargs):
         self.client.listen(self.on_message)
