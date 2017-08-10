@@ -1,4 +1,4 @@
-#!/bin/sh -e
+u#!/bin/sh -e
 
 # Edit the following to change the name of the database user that will be created:
 APP_DB_USER=vagrant
@@ -84,13 +84,6 @@ service postgresql restart
 cat << EOF | su - postgres -c psql
 -- Create the database user:
 CREATE USER $APP_DB_USER WITH PASSWORD '$APP_DB_PASS';
-
--- Create the database:
-CREATE DATABASE $APP_DB_NAME WITH OWNER=$APP_DB_USER
-                                  LC_COLLATE='en_US.utf8'
-                                  LC_CTYPE='en_US.utf8'
-                                  ENCODING='UTF8'
-                                  TEMPLATE=template0;
 EOF
 
 #	Linux utils
@@ -103,7 +96,7 @@ apt-get install -y libxslt1-dev libffi-dev libssl-dev
 apt-get install -y python3 python3-setuptools python3-dev libpq-dev pep8
 
 #	pip, ipython and virtualenv
-sudo apt-get install python-dev python-pip
+sudo apt-get -y install python-dev python-pip
 apt-get install -y python3-pip ipython3
 pip3 install virtualenv
 pip3 install virtualenvwrapper
@@ -113,7 +106,6 @@ apt-get install -y libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms
 
 #	Scrapy requirements
 apt-get install -y python3-lxml
-port install -y py27-lxml
 
 #	apt-get cleanup
 apt-get clean

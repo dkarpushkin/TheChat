@@ -12,7 +12,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'chat',
-        'USER': 'ubuntu',
+        'USER': 'vagrant',
         'PASSWORD': 'vagrant',
         'HOST': 'localhost',
         'PORT': '5432',

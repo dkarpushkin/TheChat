@@ -6,9 +6,10 @@ from chat_app.models import Room, Message
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        self.fill_test_users()
         self.fill_rooms()
-        self.fill_test_messages()
+        if options.get('testdata'):
+            self.fill_test_users()
+            self.fill_test_messages()
 
     def fill_test_users(self):
         User.objects.all().delete()
