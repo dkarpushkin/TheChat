@@ -53,7 +53,7 @@ class ChatView(JSONResponseMixin, LoginRequiredMixin, ListView):
     """
 
     model = Message
-    template_name = 'chat_template.html'
+    template_name = 'chatapp/chat_template.html'
     ordering = '-posted_at'
     context_object_name = 'messages'
 
@@ -66,7 +66,7 @@ class ChatView(JSONResponseMixin, LoginRequiredMixin, ListView):
         room = Room.objects.get(slug=room_slug)
         self.qs = self.qs.filter(room__slug = room_slug).select_related('author')
 
-        return self.qs
+        return self.qs[:100]
 
     def get_context_data(self, **kwargs):
         room_slug = self.kwargs.get('room_slug')

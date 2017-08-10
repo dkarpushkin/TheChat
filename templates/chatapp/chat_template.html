@@ -6,9 +6,18 @@
   <body class="container">
   <div class="fill content">
 
-    <div class="header">
-      <h1 class="left">{{ room.name|upper }}</h1>
-      <h1 class="right">HEEBO.CHAT</h1>
+    <div class="header row">
+      <div class="col-9">
+        {{ room.name|upper }}
+      </div>
+      <div class="col-1">
+        <form action="{% url 'logout' %}">
+          <button id="logout_btn">Log out</button>
+        </form>
+      </div>
+      <div class="col-2">
+        HEEBO.CHAT
+      </div>
     </div>
 
     <div class="row chat-box">
@@ -16,13 +25,13 @@
       <div class="messages-container col-10">
         {#      шаблон для новых сообщений#}
         <div hidden class="row msg">
-          <div class="col-2 username"><h4></h4></div>
+          <div class="col-2 username"><span></span></div>
           <div class="col-10 text"><span></span></div>
         </div>
 
         {% for message in messages %}
           <div class="row msg">
-            <div class="col-2 username"><h4>{{ message.author }}</h4></div>
+            <div class="col-2 username"><span>{{ message.author }}</span></div>
             <div class="col-10 text"><span>{{ message.text }}</span></div>
           </div>
         {% endfor %}
@@ -38,12 +47,12 @@
 
           {#      шаблон для создания новых пользователей#}
           <div class="user" hidden>
-            <h4 class=".username"></h4>
+            <span class=".username"></span>
           </div>
 
           {% for user_att in user_atts %}
             <div class="user{% if user == user_att.user %} own{% endif %}">
-              <h4 class=".username">{{ user_att.user.username }}</h4>
+              <span class=".username">{{ user_att.user.username }}</span>
             </div>
           {% endfor %}
         </div>
@@ -64,7 +73,7 @@
 
   </div>  <!-- div.content -->
 
-  {% include 'javascripts.html' %}
+  {% include 'chatapp/javascripts.html' %}
   <script type="application/javascript">
       info = {
           room_slug: '{{ room.slug }}',

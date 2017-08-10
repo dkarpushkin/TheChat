@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
 
 from Chat.views import LoginNoPassword
@@ -24,6 +25,9 @@ urlpatterns = [
         LoginNoPassword.as_view(success_url=reverse_lazy('chatapp:lobby'),
                                 template_name='registration/login.html'),
         name='login'),
+    url(r'logout',
+        LogoutView.as_view(next_page=reverse_lazy('login')),
+        name='logout'),
     url(r'^',
         include('chat_app.urls'),
         name='chatapp'),

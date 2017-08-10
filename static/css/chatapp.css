@@ -7,10 +7,6 @@ html, body {
 }
 
 .content {
-    margin: 0;
-}
-
-.content {
     position: relative;
     height: 100%;
     overflow: hidden;
@@ -25,14 +21,19 @@ html, body {
     border-width: 1pt;
     border-color: #4990E2;
     height: 10%;
-    padding: 5pt 10pt;
+    padding: 10pt 15pt;
+    left: 15px;
+    font-size: 25px;
 }
 .header .left {
     left: 0;
-    display: inline;
 }
 .header .right {
     float: right;
+}
+.header button {
+    font-size: 15px;
+    position: absolute;
 }
 
 .chat-box {
@@ -83,6 +84,10 @@ html, body {
 
     padding-left: 10px;
 }
+.messages-container .username {
+    font-size: 20px;
+    font-weight: bold;
+}
 
 .msg {
     margin: 40px 5px;
@@ -116,6 +121,7 @@ html, body {
     height: 100%;
     background-color: #4990E2;
     color: white;
+    font-size: 25px;
 }
 
 #message-input {

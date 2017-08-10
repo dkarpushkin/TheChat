@@ -7,8 +7,8 @@
             .done(function (data) {
                 $('.join_button').hide()
             })
-            .fail(function (data) {
-                alert(data.errors.join())
+            .fail(function () {
+                // alert(data.errors.join())
             });
     }
 
@@ -21,8 +21,8 @@
             .done(function (d) {   //  on success
                 return
             })
-            .fail(function (data) {   //  on error
-                alert(data.errors.join())
+            .fail(function () {   //  on error
+                alert('You are not joined')
             });
 
         event.preventDefault();
@@ -34,7 +34,7 @@
 
         var new_msg = msg_template.clone();
         new_msg.removeAttr('hidden');
-        new_msg.find('.username h4').text(msg_data['nickname']);
+        new_msg.find('.username span').text(msg_data['nickname']);
         new_msg.find('.text span').text(msg_data['text']);
 
         msg_template.parent().prepend(new_msg)
@@ -45,7 +45,7 @@
 
         var new_user = user_template.clone();
         new_user.removeAttr('hidden');
-        new_user.find('h4').text(user_data['nickname']);
+        new_user.find('span').text(user_data['nickname']);
 
         user_template.parent().prepend(new_user);
     }
