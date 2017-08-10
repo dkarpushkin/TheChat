@@ -85,7 +85,7 @@ cat << EOF | su - postgres -c psql
 -- Create the database user:
 CREATE USER $APP_DB_USER WITH PASSWORD '$APP_DB_PASS';
 
-create database chat with owner=vagrant teplate=template0;
+create database chat with owner=vagrant template=template0;
 EOF
 
 #	Linux utils
