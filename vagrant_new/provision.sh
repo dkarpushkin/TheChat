@@ -117,6 +117,8 @@ apt-get clean
 
 #	python django
 pip3 install -r /project/requirements.txt
+python3 /project/manage.py migrate
+python3 /project/manage.py fill_db
 
 
 #	Disabling firewall
