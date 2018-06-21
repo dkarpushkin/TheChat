@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI service
+After=syslog.target
+
+[Service]
+ExecStart=/usr/local/bin/uwsgi --ini /etc/uwsgi/uwsgi.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+ExecStartPre=mkdir -p /run/uwsgi; chown -R www-data:www-data /run/uwsgi
+
+[Install]
+WantedBy=multi-user.target

@@ -59,7 +59,7 @@
         var ws;
 
         function run_ws_chat() {
-            ws = new WebSocket(build_wc_url(location.hostname, info.wc_port) + room_slug + "/");
+            ws = new WebSocket(build_wc_url(info.ws_host, info.ws_port) + room_slug + "/");
 
             ws.onmessage = function (event) {
                 var msg_data = JSON.parse(event.data);

@@ -5,6 +5,7 @@ SESSION_ENGINE = 'redis_sessions.session'
 # SESSION_REDIS_HOST = 'localhost'
 # SESSION_REDIS_PORT = 6379
 
+WS_HOST = '127.0.0.1'
 WS_PORT = 8888
 
 # Database
@@ -14,7 +15,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'chat',
-        'USER': 'ubuntu',
+        'USER': 'vagrant',
         'PASSWORD': 'vagrant',
         'HOST': 'localhost',
         'PORT': '5432',

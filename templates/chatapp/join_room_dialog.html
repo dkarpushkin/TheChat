@@ -1,0 +1,15 @@
+{% load widget_tweaks %}
+
+<div class="modal fade" id="join-room-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Login to Your Account</h1><br>
+      <form id="join_room_form" method="post" action="{% url 'joinroom' room_slug=room.slug %}">
+        <input type="text" name="nickname" placeholder="Your nickname">
+        <button class="login loginmodal-submit">JOIN</button>
+{#        <input type="submit" name="joinroom" class="login loginmodal-submit" value="Join">#}
+      </form>
+    </div>
+  </div>
+</div>

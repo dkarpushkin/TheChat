@@ -82,6 +82,7 @@ class ChatView(JSONResponseMixin, LoginRequiredMixin, ListView):
             'room': room,
             'user_att': room_att,
             'is_joined': len(room_att) > 0,
+            'ws_host': settings.WS_HOST,
             'ws_port': settings.WS_PORT
         })
 

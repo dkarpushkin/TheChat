@@ -83,7 +83,8 @@
               {% endif %}
               username: '{{ user.username }}'
           },
-          wc_port: {{ ws_port }}
+          ws_host: '{{ ws_host }}',
+          ws_port: {{ ws_port }}
       };
 
       $(document).ready(function () {
